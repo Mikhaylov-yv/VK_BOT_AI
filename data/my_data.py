@@ -1,0 +1,19 @@
+class MyVKData:
+    #MY_USER2_ID = '497250699'
+    #MY_USER_ID = '255960'
+    MY_PRIL_ID = '6634997'
+    #then_USER_ID = '1'
+    #API_URL = 'https://api.vk.com/method/'
+    API_ID = 6634997
+    LOGIN = '+7(951)652-06-40'
+    GET_PASSWORD = 'Gtkzvf1989'
+    TOKEN = '538ffb1e02ef946897625912e9a7f09a1a783efbedf4d9693f2782527f66fdaf6d06d679ac7e2982ab912'
+
+class MyVKData_O:
+
+    MY_PRIL_ID = '6659556'
+    API_ID = 6659556
+    LOGIN = '+7(906)059-73-69'
+    GET_PASSWORD = 'Ekstruzia0831'
+    TOKEN = '5f3906175f3906175f390617c95f5c9bf355f395f3906170449611776813c78a9350ff7'
+
