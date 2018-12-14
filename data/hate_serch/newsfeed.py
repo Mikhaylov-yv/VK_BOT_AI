@@ -14,12 +14,11 @@ api = vk.API(session, v=v)
 group_id = '174909014'
 owner_id = '-' + group_id
 count = 200
-newsfeed = vkapi.newsfeed.search(q = 'Финляндия', count = count, filters = 'post ', v=v)
-newsfeed = newsfeed['items']
-slip = 60
 
 stop = False
 while stop == False:
+    newsfeed = vkapi.newsfeed.search(q='сдам квартиру', count=count, filters='post ', v=v)
+    newsfeed = newsfeed['items']
     post_history = post_history_fill.post_history
     for i in range(len(newsfeed)):
         user_id = newsfeed[i]['from_id']
@@ -33,4 +32,4 @@ while stop == False:
                 file.write('post_history = ' + str(post_history))
                 file.close()
                 vkapi.messages.send(user_id='255960', attachment=post, group_id=group_id, v=5.0)
-time.sleep(60)
+    time.sleep(60)
