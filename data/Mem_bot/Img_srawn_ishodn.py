@@ -42,7 +42,7 @@ def compare_images(imageA, imageB, title):
     #plt.show()
 
 
-def sravnenie(original_mem, mem):
+def sravnenie(original_mem, mem,original_mem_name,mem_name,path):
         # конвертировать изображения в оттенки серого
         original_mem = cv2.cvtColor(original_mem, cv2.COLOR_BGR2GRAY)
         mem = cv2.cvtColor(mem, cv2.COLOR_BGR2GRAY)
@@ -56,20 +56,26 @@ def sravnenie(original_mem, mem):
             # show the image
             ax = fig.add_subplot(1, 3, i + 1)
             ax.set_title(name)
-            # plt.imshow(image, cmap=plt.cm.gray)
-            # plt.axis("off")
+            plt.imshow(image, cmap=plt.cm.gray)
+            plt.axis("off")
 
         # show the figure
 
         # сравнить изображения
-        delta = compare_images(original_mem, mem, "original_mem vs. mem")
+        original_mem_name = original_mem_name.split('.', 1)[0]
+        mem_name = mem_name.split('.', 1)[0]
+        baian_name = "original_mem vs. mem " + original_mem_name + ' ' + mem_name
+        delta = compare_images(original_mem, mem, baian_name)
         if int(delta) < 1000:
-            plt.show()
+
+            fig.savefig('baiani/' + baian_name + '.jpg')
+
 
 # загрузка изображений - оригинал, оригинал + контраст,
 # и оригинал + фотошоп
 path = 'photo2'
 a = os.listdir(path=path)
+
 for i in range(len(a)):
     print(str(int(i/len(a)*100)) + '%')
     original_mem_name = a[i]
@@ -79,20 +85,22 @@ for i in range(len(a)):
         mem = cv2.imread(path + '/' + mem_name)
         if original_mem_name != mem_name:
             if original_mem.shape == mem.shape:
-                sravnenie(original_mem, mem)
+                sravnenie(original_mem, mem,original_mem_name,mem_name,path)
             elif original_mem.shape[0]/original_mem.shape[1] == mem.shape[0]/mem.shape[1]:
-                x = original_mem.shape[0] / mem.shape[0]
-                mem = cv2.resize(mem, (0,0), fx=x, fy=x)
-                sravnenie(original_mem, mem)
-            '''
+                sootn = original_mem.shape[0] / mem.shape[0]
+                mem = cv2.resize(mem, (0,0), fx=sootn, fy=sootn)
+                sravnenie(original_mem, mem,original_mem_name,mem_name,path)
+
             else:
-                x = original_mem.shape[0] / mem.shape[0]
-                mem = cv2.resize(mem, (0, 0), fx=x, fy=x)
+                sootn_x = original_mem.shape[0] / mem.shape[0]
+                sootn_y = original_mem.shape[1] / mem.shape[1]
+                if sootn_y>sootn_x:
+                    mem = cv2.resize(mem, (0, 0), fx=sootn_y, fy=sootn_y)
+                else:
+                    mem = cv2.resize(mem, (0, 0), fx=sootn_x, fy=sootn_x)
+
                 x = original_mem.shape[0] - mem.shape[0]
                 y = original_mem.shape[1] - mem.shape[1]
+                mem_crop = mem[0:0+original_mem.shape[0], 0:0+original_mem.shape[1]]
+                sravnenie(original_mem, mem_crop, original_mem_name, mem_name, path)
 
-                if y != 0:
-                    if y > 0:
-                        original_mem_crop = original_mem[0:0+mem.shape[0], 0:0+mem.shape[1]]
-                print('hi')
-            '''
