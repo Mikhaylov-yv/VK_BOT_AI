@@ -81,7 +81,8 @@ for i in range(len(a)):
     original_mem_name = a[i]
     for i2 in range(len(a)):
         mem_name = a[i2]
-        original_mem = cv2.imread(path + '/' + original_mem_name)
+
+
         mem = cv2.imread(path + '/' + mem_name)
         if original_mem_name != mem_name:
             if original_mem.shape == mem.shape:

@@ -1,10 +1,8 @@
 import vk
-from io import StringIO
-import csv
+
 import time
 import datetime
-import numpy as np
-import re
+
 from my_data import MyVKData_O
 import logging
 import sys

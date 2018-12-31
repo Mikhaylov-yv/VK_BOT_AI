@@ -14,7 +14,7 @@ def mse(imageA, imageB):
 
     return err
 
-def compare_images(imageA, imageB, title):
+def compare_images(imageA, imageB):
     # вычислить среднеквадратическую ошибку и структурное сходство
     # индекс для изображений
     m = mse(imageA, imageB)
@@ -29,7 +29,7 @@ def sravnenie(original_mem, mem,original_mem_name,mem_name):
         original_mem_name = original_mem_name.split('.', 1)[0]
         mem_name = mem_name.split('.', 1)[0]
         baian_name = "original_mem vs. mem " + original_mem_name + ' ' + mem_name
-        delta = compare_images(original_mem, mem, baian_name)
+        delta = compare_images(original_mem, mem)
         print(int(delta))
         baian = False
         if int(delta) < 1000:
